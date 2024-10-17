@@ -2,11 +2,10 @@ name: Node.js CI
 
 on:
   push:
-    branches:
-      - master
+    branches: [ "master" ]
   pull_request:
-    branches:
-      - master
+    branches: [ "master" ]
+
 
 jobs:
   build:
@@ -14,7 +13,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x, 20.x, 22.x] # You can specify the Node.js versions you want to test
+        node-version: [18.x, 20.x, 22.x]
 
     steps:
     - name: Checkout repository
