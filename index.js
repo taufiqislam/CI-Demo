@@ -1,5 +1,5 @@
 // Function to sum two numbers
-export const sum = (a, b) => a + b;
+export const sum = (a, b) => a * b;
 
 // Predefined numbers
 const num1 = 5;
