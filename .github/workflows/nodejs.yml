@@ -36,6 +36,9 @@ jobs:
       run: |
         docker run --name ci-demo-app -d -p 6000:6000 ci-demo-app
 
+    - name: Start application
+      run: yarn start
+      
     - name: Run tests inside Docker container
       run: |
         docker exec ci-demo-app yarn test
