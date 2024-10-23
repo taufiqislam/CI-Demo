@@ -35,7 +35,6 @@ jobs:
     - name: Run Docker container
       run: |
         docker run --name ci-demo-app -d -p 8000:8000 ci-demo-app
-        # Adjust the port mapping if necessary, based on your Dockerfile
 
     - name: Run tests inside Docker container
       run: |
