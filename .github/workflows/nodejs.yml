@@ -6,7 +6,6 @@ on:
   pull_request:
     branches: [ "master" ]
 
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -30,5 +29,17 @@ jobs:
     - name: Run ESLint
       run: yarn lint # Assuming you've set up a lint script in your package.json
 
-    - name: Run tests
-      run: yarn test
+    - name: Build Docker image
+      run: docker build . -t ci-demo-app
+
+    - name: Run Docker container
+      run: |
+        docker run --name ci-demo-app -d -p 8000:8000 ci-demo-app
+        # Adjust the port mapping if necessary, based on your Dockerfile
+
+    - name: Run tests inside Docker container
+      run: |
+        docker exec ci-demo-app yarn test
+
+    - name: Stop and remove Docker container
+      run: docker stop ci-demo-app && docker rm ci-demo-app

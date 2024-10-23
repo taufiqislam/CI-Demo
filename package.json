@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "mocha",
+    "start": "node index.js",
     "lint": "eslint ."
   },
   "devDependencies": {
@@ -17,6 +18,7 @@
   },
   "dependencies": {
     "chai": "^5.1.1",
+    "express": "^4.21.1",
     "mocha": "^10.7.3"
   }
 }
