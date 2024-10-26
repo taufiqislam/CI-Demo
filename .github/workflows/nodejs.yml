@@ -28,6 +28,13 @@ jobs:
     - name: Build Docker image
       run: docker build . -t ci-demo-app
 
+    - name: Stop and remove existing container if exists
+      run: |
+        if [ "$(docker ps -aq -f name=ci-demo-app)" ]; then
+          docker stop ci-demo-app
+          docker rm ci-demo-app
+        fi
+
     - name: Run Docker container
       run: docker run --name ci-demo-app -d -p 6000:6000 ci-demo-app
 
