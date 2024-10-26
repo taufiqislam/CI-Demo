@@ -8,7 +8,7 @@ const num1 = 5;
 const num2 = 10;
 
 // Function to sum two numbers
-export const sum = (a, b) => a * b;
+export const sum = (a, b) => a + b;
 
 // Define a route to return the sum of the two numbers
 app.get('/', (req, res) => {
