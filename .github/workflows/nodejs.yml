@@ -22,26 +22,13 @@ jobs:
     - name: Install dependencies with Yarn
       run: yarn install
 
-    - name: Run ESLint
-      run: yarn lint 
-
-    - name: Build Docker image
-      run: docker build . -t ci-demo-app
-
-    - name: Stop and remove existing container if exists
+    - name: Build and start services with Docker Compose
       run: |
-        if [ "$(docker ps -aq -f name=ci-demo-app)" ]; then
-          docker stop ci-demo-app
-          docker rm ci-demo-app
-        fi
+        docker-compose down  
+        docker-compose up -d --build app  
 
-    - name: Run Docker container
-      run: docker run --name ci-demo-app -d -p 6000:6000 ci-demo-app
+    - name: Run tests
+      run: docker-compose run test  
 
-    - name: Run tests inside Docker container
-      run: docker exec ci-demo-app yarn test
-
-    - name: Stop and remove Docker container
-      run: |
-        docker stop ci-demo-app || true
-        docker rm ci-demo-app || true
+    - name: Shut down Docker Compose services
+      run: docker-compose down
