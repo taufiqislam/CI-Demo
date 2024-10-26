@@ -9,20 +9,15 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 30  # Set an appropriate timeout
-
-    strategy:
-      matrix:
-        node-version: [18.x, 20.x, 22.x]
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    - name: Set up Node.js ${{ matrix.node-version }}
+    - name: Set up Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: '18.x'
 
     - name: Install dependencies with Yarn
       run: yarn install
@@ -32,13 +27,6 @@ jobs:
 
     - name: Build Docker image
       run: docker build . -t ci-demo-app
-
-    - name: Stop and remove existing container if exists
-      run: |
-        if [ "$(docker ps -aq -f name=ci-demo-app)" ]; then
-          docker stop ci-demo-app
-          docker rm ci-demo-app
-        fi
 
     - name: Run Docker container
       run: docker run --name ci-demo-app -d -p 6000:6000 ci-demo-app
