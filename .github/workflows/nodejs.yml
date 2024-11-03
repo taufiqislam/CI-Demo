@@ -26,8 +26,5 @@ jobs:
     - name: Run ESLint
       run: yarn lint # Assuming you've set up a lint script in your package.json
 
-    - name: Start App
-      run: yarn start
-
     - name: Run tests
       run: yarn test
