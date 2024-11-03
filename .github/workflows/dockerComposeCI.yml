@@ -18,6 +18,5 @@ jobs:
         with:
           compose-file: "./docker-compose.yml" 
 
-      - name: Execute tests in the app service
-        run: |
-          docker-compose exec test yarn test
+      - name: Run Tests
+        run: docker-compose run test

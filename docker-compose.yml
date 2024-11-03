@@ -13,7 +13,7 @@ services:
       - /usr/src/app/node_modules  # Node modules directory
     command: yarn start
     
-
+  # Separate test service to be run manually
   test:
     build:
       context: .
